@@ -10,7 +10,7 @@ spec:
   chart:
     git: git@github.com:cryptoprofessor101/blockchain-automation-framework.git
     ref: master
-    path: examples/supplychain-app/charts/ca    
+    path: platforms/hyperledger-fabric/charts/ca    
   values:
     metadata:
       namespace: supplychain-net
