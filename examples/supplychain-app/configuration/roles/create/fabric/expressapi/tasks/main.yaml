@@ -1,6 +1,6 @@
 ############################################################################################
 # Create express-api value file for the peer nodes
-- name: "Create express-api values file for peer organizations"
+- name: "Create express-api values file for peer organizations "
   include_role:
     name: helm_component
   vars:

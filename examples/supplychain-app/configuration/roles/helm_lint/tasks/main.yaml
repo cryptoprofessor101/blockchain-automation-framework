@@ -31,7 +31,7 @@
   when: value_stat_result.stat.exists == True
 
 # Execute helm lint. If this fails, fix the errors
-- name: "Run helm lint"
+- name: "Run helm lint - {{chart_path}}"
   shell: |
     helm lint -f "./build/test/{{metadata.name}}.yaml" "{{playbook_dir}}/../../../{{chart_path}}/{{charts[helmtemplate_type]}}"
   when: value_stat_result.stat.exists == True
