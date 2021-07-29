@@ -1,0 +1,46 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: warehouse-restserver
+  namespace: warehouse-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  chart:
+    path: examples/supplychain-app/charts/fabric-restserver
+    git: git@github.com:cryptoprofessor101/blockchain-automation-framework.git
+    ref: master
+  releaseName: warehouse-restserver
+  values:
+    metadata:
+      namespace: warehouse-net
+    server:
+      name: warehouse-restserver
+      port: 20001
+      localmspid: warehouseMSP
+      image: index.docker.io/hyperledgerlabs/supplychain_fabric:rest_server_latest
+      username: user1
+      cert_path: "/secret/tls/user1.cert"
+      key_path: "/secret/tls/user1.pem"
+    storage:
+      storageclassname: warehousesc
+      storagesize: 512Mi
+    vault:
+      address: http://127.0.0.1:8200
+      role: vault-role
+      authpath: devwarehouse-net-auth
+      secretprefix: secret/crypto/peerOrganizations/warehouse-net
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+      image: hyperledgerlabs/alpine-utils:1.0
+    service:
+      servicetype: ClusterIP
+      ports:
+        apiPort: 20001
+        targetPort: 8000
+    connection:
+      peer: peer0.warehouse-net
+      peerAddress: peer0.warehouse-net
+      peerPort: 7051
+      ordererAddress: orderer1.org.com
+      ordererPort: 8443
