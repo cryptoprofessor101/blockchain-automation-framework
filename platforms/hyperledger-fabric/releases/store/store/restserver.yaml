@@ -42,5 +42,5 @@ spec:
       peer: peer0.store-net
       peerAddress: peer0.store-net
       peerPort: 7051
-      ordererAddress: orderer1.org.com
+      ordererAddress: orderer1.ordorg-net
       ordererPort: 8443
