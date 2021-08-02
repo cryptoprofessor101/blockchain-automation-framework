@@ -9,7 +9,7 @@ spec:
   releaseName: supplychain-net-ca
   chart:
     git: git@github.com:cryptoprofessor101/blockchain-automation-framework.git
-    ref: local
+    ref: main
     path: platforms/hyperledger-fabric/charts/ca    
   values:
     deployment:
@@ -33,7 +33,7 @@ spec:
     vault:
       role: vault-role
       address: http://172.31.18.154:8200
-      authpath: localsupplychain-net-auth
+      authpath: devsupplychain-net-auth
       secretcert: secret/crypto/ordererOrganizations/supplychain-net/ca?ca.supplychain-net-cert.pem
       secretkey: secret/crypto/ordererOrganizations/supplychain-net/ca?supplychain-net-CA.key
       secretadminpass: secret/credentials/supplychain-net/ca/supplychain?user
