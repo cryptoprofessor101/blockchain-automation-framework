@@ -9,7 +9,7 @@ spec:
   releaseName: manufacturer-net-ca
   chart:
     git: git@github.com:cryptoprofessor101/blockchain-automation-framework.git
-    ref: local
+    ref: main
     path: platforms/hyperledger-fabric/charts/ca    
   values:
     metadata:
@@ -34,7 +34,7 @@ spec:
     vault:
       role: vault-role
       address: http://172.31.18.154:8200
-      authpath: localmanufacturer-net-auth
+      authpath: devmanufacturer-net-auth
       secretcert: secret/crypto/peerOrganizations/manufacturer-net/ca?ca.manufacturer-net-cert.pem
       secretkey: secret/crypto/peerOrganizations/manufacturer-net/ca?manufacturer-net-CA.key
       secretadminpass: secret/credentials/manufacturer-net/ca/manufacturer?user
