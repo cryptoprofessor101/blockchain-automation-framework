@@ -1,6 +1,6 @@
 ---
 # This tasks ensures the directory existance and registers the result essential for idempotence test
-- name: "check if dir exists or not"
+- name: "check if dir exists or not - {{path}}"
   stat:
     path: "{{ path }}"
   register: dir_check
