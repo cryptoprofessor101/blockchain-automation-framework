@@ -1,42 +1,43 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: supplychain-net-ca
-  namespace: supplychain-net
+  name: warehouse-net-ca
+  namespace: warehouse-net
   annotations:
     fluxcd.io/automated: "false"
 spec:
-  releaseName: supplychain-net-ca
+  releaseName: warehouse-net-ca
   chart:
     git: git@github.com:cryptoprofessor101/blockchain-automation-framework.git
     ref: master
     path: platforms/hyperledger-fabric/charts/ca    
   values:
+    metadata:
+      namespace: warehouse-net
+      images:
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+        ca: hyperledger/fabric-ca:1.4.8
     deployment:
       annotations:
     annotations:  
       service:
         - example1: example2
       pvc:
-    metadata:
-      namespace: supplychain-net
-      images:
-        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
-        ca: hyperledger/fabric-ca:1.4.8
+       
     server:
       name: ca
       tlsstatus: true
-      admin: supplychain-admin
+      admin: warehouse-admin
     storage:
-      storageclassname: supplychainsc
-      storagesize: 512Mi 
+      storageclassname: warehousesc
+      storagesize: 512Mi
     vault:
       role: vault-role
       address: http://172.31.18.154:8200
-      authpath: devsupplychain-net-auth
-      secretcert: secret/crypto/ordererOrganizations/supplychain-net/ca?ca.supplychain-net-cert.pem
-      secretkey: secret/crypto/ordererOrganizations/supplychain-net/ca?supplychain-net-CA.key
-      secretadminpass: secret/credentials/supplychain-net/ca/supplychain?user
+      authpath: devwarehouse-net-auth
+      secretcert: secret/crypto/peerOrganizations/warehouse-net/ca?ca.warehouse-net-cert.pem
+      secretkey: secret/crypto/peerOrganizations/warehouse-net/ca?warehouse-net-CA.key
+      secretadminpass: secret/credentials/warehouse-net/ca/warehouse?user
       serviceaccountname: vault-auth
       imagesecretname: regcred
     service:
@@ -46,5 +47,5 @@ spec:
           port: 7054
     proxy:
       provider: haproxy
-      type: orderer
+      type: peer
       external_url_suffix: test.com
