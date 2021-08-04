@@ -1,0 +1,52 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: channel-carrier-allchannel
+  namespace: carrier-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: channel-carrier-allchannel
+  chart:
+    git: git@github.com:cryptoprofessor101/blockchain-automation-framework.git
+    ref: main
+    path: platforms/hyperledger-fabric/charts/create_channel   
+  values:
+    metadata:
+      namespace: carrier-net
+      network:
+        version 2.2.0
+      images:
+        fabrictools: hyperledger/fabric-tools:2.2.0
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+    peer:
+      name: peer0
+      address: peer0.carrier-net:7051
+      localmspid: carrierMSP
+      loglevel: debug
+      tlsstatus: true
+
+    vault:
+      role: vault-role
+      address: http://adfb01305e9ce4d1fafaafb51264f708-968884330.ap-south-1.elb.amazonaws.com:8200
+      authpath: devcarrier-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/carrier-net/users/admin
+      orderersecretprefix: secret/crypto/peerOrganizations/carrier-net/orderer 
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+
+    channel:
+      name: allchannel
+    orderer:
+      address: orderer1.supplychain-net:7050
+    channeltx: |-
+      CpkEChgKFggCGgYIto+qiAYiCmFsbGNoYW5uZWwS/AMK+QMKCmFsbGNoYW5uZWwSZhJUCgtBcHBs
+      aWNhdGlvbhJFEhMKD21hbnVmYWN0dXJlck1TUBIAEg4KCmNhcnJpZXJNU1ASABIMCghzdG9yZU1T
+      UBIAEhAKDHdhcmVob3VzZU1TUBIAGg4KCkNvbnNvcnRpdW0SABqCAxLWAgoLQXBwbGljYXRpb24S
+      xgIIARIMCghzdG9yZU1TUBIAEhAKDHdhcmVob3VzZU1TUBIAEhMKD21hbnVmYWN0dXJlck1TUBIA
+      Eg4KCmNhcnJpZXJNU1ASABokCgxDYXBhYmlsaXRpZXMSFBIKCggKBFYyXzASABoGQWRtaW5zIiIK
+      B1dyaXRlcnMSFxINCAMSCQoHV3JpdGVycxoGQWRtaW5zIiIKBkFkbWlucxIYEg4IAxIKCgZBZG1p
+      bnMQAhoGQWRtaW5zIiwKC0VuZG9yc2VtZW50Eh0SEwgDEg8KC0VuZG9yc2VtZW50EAIaBkFkbWlu
+      cyI1ChRMaWZlY3ljbGVFbmRvcnNlbWVudBIdEhMIAxIPCgtFbmRvcnNlbWVudBACGgZBZG1pbnMi
+      IgoHUmVhZGVycxIXEg0IAxIJCgdSZWFkZXJzGgZBZG1pbnMqBkFkbWlucxonCgpDb25zb3J0aXVt
+      EhkSFwoVU3VwcGx5Q2hhaW5Db25zb3J0aXVt
