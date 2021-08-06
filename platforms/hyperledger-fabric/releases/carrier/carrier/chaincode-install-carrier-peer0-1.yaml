@@ -39,7 +39,7 @@ spec:
       address: orderer1.supplychain-net:7050
     chaincode:
       builder: hyperledger/fabric-ccenv:2.2.2
-      name: my_cc
+      name: supplychain
       version: 1
       lang: golang
       maindirectory: /home/ubuntu/baf/blockchain-automation-framework/examples/supplychain-app/fabric/chaincode_rest_server/chaincode/supplychain/cmd
