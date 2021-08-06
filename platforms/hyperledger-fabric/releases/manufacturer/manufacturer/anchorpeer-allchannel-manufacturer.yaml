@@ -39,11 +39,11 @@ spec:
     orderer:
       address: orderer1.supplychain-net:7050
     anchorstx: |-
-      CtkCChgKFggCGgYI6/WuiAYiCmFsbGNoYW5uZWwSvAIKuQIKCmFsbGNoYW5uZWwSaBJmCgtBcHBs
-      aWNhdGlvbhJXCAESUwoPbWFudWZhY3R1cmVyTVNQEkAaBwoDTVNQEgAiCgoGQWRtaW5zEgAiDwoL
-      RW5kb3JzZW1lbnQSACILCgdSZWFkZXJzEgAiCwoHV3JpdGVycxIAGsABEr0BCgtBcHBsaWNhdGlv
+      CtkCChgKFggCGgYI9vayiAYiCmFsbGNoYW5uZWwSvAIKuQIKCmFsbGNoYW5uZWwSaBJmCgtBcHBs
+      aWNhdGlvbhJXCAESUwoPbWFudWZhY3R1cmVyTVNQEkAaBwoDTVNQEgAiCwoHUmVhZGVycxIAIgsK
+      B1dyaXRlcnMSACIKCgZBZG1pbnMSACIPCgtFbmRvcnNlbWVudBIAGsABEr0BCgtBcHBsaWNhdGlv
       bhKtAQgBEqgBCg9tYW51ZmFjdHVyZXJNU1ASlAEIARpICgtBbmNob3JQZWVycxI5Ei8KLQoocGVl
       cjAubWFudWZhY3R1cmVyLW5ldC5kZXZlbG9wLmxvY2FsLmNvbRD7QRoGQWRtaW5zGgcKA01TUBIA
-      IgoKBkFkbWlucxIAIg8KC0VuZG9yc2VtZW50EgAiCwoHUmVhZGVycxIAIgsKB1dyaXRlcnMSACoG
+      IgsKB1dyaXRlcnMSACIKCgZBZG1pbnMSACIPCgtFbmRvcnNlbWVudBIAIgsKB1JlYWRlcnMSACoG
       QWRtaW5z
 
