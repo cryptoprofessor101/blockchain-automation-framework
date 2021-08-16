@@ -66,7 +66,7 @@
 - name: Write reviewer token
   shell: |
     export REVIEWER_TOKEN=$(KUBECONFIG={{ kubernetes.config_file }} kubectl get secret $(KUBECONFIG={{ kubernetes.config_file }} kubectl get serviceaccount -n {{ component_ns }} vault-reviewer -o jsonpath={.secrets[0].name}) -n {{ component_ns }} -o  jsonpath={.data.token} | base64 -d)
-    vault write auth/{{ component_auth }}/config token_reviewer_jwt="$REVIEWER_TOKEN" kubernetes_host=$(KUBECONFIG={{ kubernetes.config_file }} kubectl config view -o jsonpath="{.clusters[?(@.name==\"{{ kubernetes.context }}\")].cluster.server}") kubernetes_ca_cert=@"./build/{{ component_ns }}.ca.cert"
+    vault write auth/{{ component_auth }}/config token_reviewer_jwt="$REVIEWER_TOKEN" kubernetes_host=$(KUBECONFIG={{ kubernetes.config_file }} kubectl config view -o jsonpath="{.clusters[?(@.name==\"{{ kubernetes.context }}\")].cluster.server}") kubernetes_ca_cert=@"./build/{{ component_ns }}.ca.cert" disable_iss_validation=true
   environment:
     VAULT_ADDR: "{{ vault.url }}"
     VAULT_TOKEN: "{{ vault.root_token }}"
@@ -101,7 +101,7 @@
 # This task creates the vault auth
 - name: Create Vault auth role
   shell: |
-    vault write auth/{{ component_auth }}/role/vault-role bound_service_account_names=vault-auth bound_service_account_namespaces={{ component_ns }} policies=vault-crypto-{{ component_type }}-{{ component_name }}-ro ttl=120s
+    vault write auth/{{ component_auth }}/role/vault-role bound_service_account_names=vault-auth bound_service_account_namespaces={{ component_ns }} policies=vault-crypto-{{ component_type }}-{{ component_name }}-ro ttl=120s disable_iss_validation=true
   environment:
     VAULT_ADDR: "{{ vault.url }}"
     VAULT_TOKEN: "{{ vault.root_token }}"
