@@ -31,5 +31,5 @@ spec:
       provider: none
       name: manufacturer
       type: fabric
-      external_url_suffix: develop.local.com
+      external_url_suffix: org2ambassador.blockchaincloudpoc.com
       peer_name: peer0
