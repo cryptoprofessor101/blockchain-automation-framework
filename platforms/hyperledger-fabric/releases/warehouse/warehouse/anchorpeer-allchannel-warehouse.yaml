@@ -1,0 +1,48 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: anchorpeer-allchannel-warehouse
+  namespace: warehouse-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: anchorpeer-allchannel-warehouse
+  chart:
+    git: git@github.com:cryptoprofessor101/blockchain-automation-framework.git
+    ref: main
+    path: platforms/hyperledger-fabric/charts/anchorpeer
+  values:
+    metadata:
+      namespace: warehouse-net
+      images:
+        fabrictools: hyperledger/fabric-tools:2.2.2
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+
+    peer:
+      name: peer0
+      address: peer0.warehouse-net:7051
+      localmspid: warehouseMSP
+      loglevel: debug
+      tlsstatus: true
+
+    vault:
+      role: vault-role
+      address: http://ab0805ecbb73a45988a4f31e0e50d08b-207072700.ap-south-1.elb.amazonaws.com:8200
+      authpath: devwarehouse-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/warehouse-net/users/admin
+      orderersecretprefix: secret/crypto/peerOrganizations/warehouse-net/orderer
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+
+    channel:
+      name: allchannel      
+    orderer:
+      address: orderer1.supplychain-net:7050
+    anchorstx: |-
+      Cr0CChgKFggCGgYIqqTyiAYiCmFsbGNoYW5uZWwSoAIKnQIKCmFsbGNoYW5uZWwSZRJjCgtBcHBs
+      aWNhdGlvbhJUCAESUAoMd2FyZWhvdXNlTVNQEkAaBwoDTVNQEgAiDwoLRW5kb3JzZW1lbnQSACIL
+      CgdSZWFkZXJzEgAiCwoHV3JpdGVycxIAIgoKBkFkbWlucxIAGqcBEqQBCgtBcHBsaWNhdGlvbhKU
+      AQgBEo8BCgx3YXJlaG91c2VNU1ASfwgBGjMKC0FuY2hvclBlZXJzEiQSGgoYChNwZWVyMC53YXJl
+      aG91c2UtbmV0EIs3GgZBZG1pbnMaBwoDTVNQEgAiDwoLRW5kb3JzZW1lbnQSACILCgdSZWFkZXJz
+      EgAiCwoHV3JpdGVycxIAIgoKBkFkbWlucxIAKgZBZG1pbnM=
+
